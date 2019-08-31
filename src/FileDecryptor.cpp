@@ -17,7 +17,7 @@ FileDecryptor::FileDecryptor(std::string inputFilename,
 }
 
 void FileDecryptor::decrypt(StringDecryptor::Mode mode) {
-	auto str_ptr = std::make_unique<std::string>("");
+	std::unique_ptr<std::string> str_ptr = std::make_unique<std::string>("");
 	char buf[1000];
 	while (this->inputFileStream.good()) {
 		this->inputFileStream.get(buf, 1000);

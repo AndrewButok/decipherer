@@ -20,7 +20,7 @@ void StringDecryptor::encrypt_thread(int begin, int thread_count, std::string &r
 }
 
 void StringDecryptor::decrypt(std::string &encoded, Mode mode) {
-	for (auto pos = encoded.begin(); pos != encoded.end(); pos++) {
+	for (std::string::iterator pos = encoded.begin(); pos != encoded.end(); pos++) {
 		if (!this->_cipher->isAlphabetChar(*pos)) {
 			pos--;
 			encoded.erase(pos + 1);
