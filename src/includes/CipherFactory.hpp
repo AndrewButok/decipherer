@@ -24,4 +24,6 @@ public:
 	CipherPtr createCipher(const std::string &a, const std::string &b);
 };
 
+
+
 #endif //CIPHERFACTORY_HPP

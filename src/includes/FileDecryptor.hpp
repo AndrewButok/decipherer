@@ -4,10 +4,6 @@
 #include <fstream>
 #include "StringDecryptor.hpp"
 
-class FileDecryptor;
-
-using FileDecryptorPtr = std::unique_ptr<FileDecryptor>;
-
 class FileDecryptor {
 private:
 	std::ifstream			inputFileStream;
@@ -23,5 +19,6 @@ public:
 	void decrypt(StringDecryptor::Mode mode);
 };
 
+using FileDecryptorPtr = std::unique_ptr<FileDecryptor>;
 
 #endif //FILEDECRYPTOR_HPP

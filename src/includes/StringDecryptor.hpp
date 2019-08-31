@@ -5,11 +5,6 @@
 #include <mutex>
 #include "ICipher.hpp"
 
-
-class StringDecryptor;
-
-using StringDecryptorPtr = std::unique_ptr<StringDecryptor>;
-
 class StringDecryptor {
 private:
 	CipherPtr					_cipher;
@@ -32,5 +27,6 @@ public:
 	void decrypt(std::string &encoded, Mode mode);
 };
 
+using StringDecryptorPtr = std::unique_ptr<StringDecryptor>;
 
 #endif //DECHIPER_HPP
