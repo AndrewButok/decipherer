@@ -20,8 +20,8 @@ public:
 	static CipherFactoryPtr getInstance();
 	virtual ~CipherFactory();
 
-	CipherPtr createCipher(std::string keyword);
-	CipherPtr createCipher(int a, int b);
+	CipherPtr createCipher(const std::string &keyword);
+	CipherPtr createCipher(const std::string &a, const std::string &b);
 };
 
 #endif //CIPHERFACTORY_HPP

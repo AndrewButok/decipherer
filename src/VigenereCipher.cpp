@@ -29,18 +29,16 @@ VigenereCipher::VigenereCipher(const std::string &key, std::string alphabet,
 	if (!key_alphabet.empty()){
 		if (!_isAlphabetValid(key_alphabet))
 			throw std::invalid_argument("Wrong key alphabet.");
+		checkKey(key, key_alphabet);
 		for (char keychar: key){
 			size_t pos = key_alphabet.find(keychar);
-			if (pos == std::string::npos)
-				throw std::invalid_argument("Wrong key.");
 			_shifts.push_back(static_cast<long>(pos));
 		}
 	}
 	else {
+		checkKey(key, this->_alphabet);
 		for (char keychar: key){
 			size_t pos = this->_alphabet.find(keychar);
-			if (pos == std::string::npos)
-				throw std::invalid_argument("Wrong key.");
 			_shifts.push_back(static_cast<long>(pos));
 		}
 	}
@@ -60,6 +58,14 @@ VigenereCipher &VigenereCipher::operator=(const VigenereCipher &vigenereCipher){
 	(this->ACipher::operator=)(vigenereCipher);
 	this->_shifts = vigenereCipher._shifts;
 	return *this;
+}
+
+void VigenereCipher::checkKey(const std::string &key, const std::string &alphabet) {
+	for (char keychar: key){
+		size_t pos = alphabet.find(keychar);
+		if (pos == std::string::npos)
+			throw std::invalid_argument("Wrong key (one or more characters is absent in alphabet).");
+	}
 }
 
 VigenereCipher::~VigenereCipher() = default;

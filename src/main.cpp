@@ -14,18 +14,16 @@ int main(int argc, char **argv) {
 	}
 	std::string cipher_name(argv[3]);
 	CipherFactoryPtr cipherFactory = CipherFactory::getInstance();
-	CipherPtr cipher;
-	if (cipher_name == "vig" || cipher_name == "vigr")
-		cipher = cipherFactory->createCipher(argv[4]);
-	else if (cipher_name == "aff" || cipher_name == "affr") {
-		int a = std::stoi(argv[4]), b = std::stoi(argv[5]);
-		cipher = cipherFactory->createCipher(a, b);
-	}
-	else {
-		std::cout << "Unknown cipher name." << std::endl;
-		return -1;
-	}
 	try {
+		CipherPtr cipher;
+		if (cipher_name == "vig" || cipher_name == "vigr")
+			cipher = cipherFactory->createCipher(argv[4]);
+		else if (cipher_name == "aff" || cipher_name == "affr")
+			cipher = cipherFactory->createCipher(argv[4], argv[5]);
+		else {
+			std::cout << "Unknown cipher name." << std::endl;
+			return -1;
+		}
 		StringDecryptor::Mode mode =
 				cipher_name.find('r') != std::string::npos ?
 				StringDecryptor::Mode::Reversed : StringDecryptor::Mode::Normal;
