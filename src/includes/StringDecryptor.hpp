@@ -19,8 +19,8 @@ private:
 	StringDecryptor(const StringDecryptor &);
 	StringDecryptor &operator=(const StringDecryptor &);
 
-	void decrypt_thread(int begin, int thread_count, std::string &encoded, std::vector<size_t> &to_del);
-	void encrypt_thread(int begin, int thread_count, std::string &raw, std::vector<size_t> &to_del);
+	void decrypt_thread(int begin, int thread_count, std::string &encoded);
+	void encrypt_thread(int begin, int thread_count, std::string &raw);
 public:
 	explicit StringDecryptor(CipherPtr cipher);
 	~StringDecryptor();

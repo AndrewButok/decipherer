@@ -3,8 +3,7 @@
 char VigenereCipher::encrypt(char in, size_t pos) {
 	long long char_pos = this->_alphabet.find(in);
 	if (char_pos == std::string::npos)
-		throw std::invalid_argument(
-				static_cast<std::string>("Character ") + in + " is not present in alphabet");
+		return ' ';
 	char_pos += _shifts[pos % _shifts.size()];
 	char_pos %= static_cast<long long>(_alphabet.size());
 	if (char_pos < 0)
@@ -15,8 +14,7 @@ char VigenereCipher::encrypt(char in, size_t pos) {
 char VigenereCipher::decrypt(char in, size_t pos) {
 	long long char_pos = this->_alphabet.find(in);
 	if (char_pos == std::string::npos)
-		throw std::invalid_argument(
-				static_cast<std::string>("Character ") + in + " is not present in alphabet");
+		return ' ';
 	char_pos += static_cast<long long>(_alphabet.size());
 	char_pos -= _shifts[pos % _shifts.size()];
 	char_pos %= static_cast<long long>(_alphabet.size());

@@ -25,9 +25,15 @@ int main(int argc, char **argv) {
 		std::cout << "Unknown cipher name." << std::endl;
 		return -1;
 	}
-	StringDecryptor::Mode mode = cipher_name.find('r') != std::string::npos ?
-			StringDecryptor::Mode::Reversed : StringDecryptor::Mode::Normal;
-	FileDecryptorPtr fileDecryptor {new FileDecryptor(argv[1], argv[2], std::move(cipher))};
-	fileDecryptor->decrypt(mode);
+	try {
+		StringDecryptor::Mode mode =
+				cipher_name.find('r') != std::string::npos ?
+				StringDecryptor::Mode::Reversed : StringDecryptor::Mode::Normal;
+		FileDecryptorPtr fileDecryptor{
+				new FileDecryptor(argv[1], argv[2], std::move(cipher))};
+		fileDecryptor->decrypt(mode);
+	} catch (std::invalid_argument &ex) {
+		std::cout << ex.what() << std::endl;
+	}
 	return 0;
 }

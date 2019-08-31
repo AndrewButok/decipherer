@@ -15,12 +15,16 @@ ACipher::ACipher(const ACipher &cipher): _alphabet(cipher._alphabet){}
 ACipher::ACipher(std::string alphabet) {
 	if (!_isAlphabetValid(alphabet))
 		throw std::invalid_argument("Invalid alphabet.");
-	this->_alphabet = alphabet;
+	this->_alphabet = std::move(alphabet);
 }
 
 ACipher &ACipher::operator=(const ACipher &cipher) {
 	this->_alphabet = cipher._alphabet;
 	return *this;
+}
+
+bool ACipher::isAlphabetChar(char ch) {
+	return this->_alphabet.find(ch) != std::string::npos;
 }
 
 ACipher::~ACipher() = default;

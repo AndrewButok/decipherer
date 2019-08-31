@@ -15,7 +15,7 @@ protected:
 	ACipher &operator=(const ACipher &);
 	explicit ACipher(std::string alphabet);
 public:
-
+	bool isAlphabetChar(char ch) override;
 	~ACipher() override;
 };
 

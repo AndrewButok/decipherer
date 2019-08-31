@@ -3,12 +3,10 @@
 #include "AffineCipher.hpp"
 
 
-char AffineCipher::encrypt(char in, size_t pos) {
-	pos = 0;
+char AffineCipher::encrypt(char in, size_t) {
 	long long char_pos = this->_alphabet.find(in);
 	if (char_pos == std::string::npos)
-		throw std::invalid_argument(
-				static_cast<std::string>("Character ") + in + " is not present in alphabet");
+		return ' ';
 	char_pos *= this->_a;
 	char_pos += this->_b;
 	char_pos %= static_cast<long long>(this->_alphabet.size());
@@ -17,12 +15,10 @@ char AffineCipher::encrypt(char in, size_t pos) {
 	return this->_alphabet[char_pos];
 }
 
-char AffineCipher::decrypt(char in, size_t pos) {
-	pos = 0;
+char AffineCipher::decrypt(char in, size_t) {
 	long long char_pos = this->_alphabet.find(in);
 	if (char_pos == std::string::npos)
-		throw std::invalid_argument(
-				static_cast<std::string>("Character ") + in + " is not present in alphabet");
+		return ' ';
 	char_pos -= this->_b;
 	char_pos *= this->_a;
 	char_pos %= static_cast<long long>(this->_alphabet.size());
