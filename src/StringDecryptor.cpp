@@ -1,7 +1,6 @@
 #include <string>
 #include <vector>
 #include <thread>
-#include <iostream>
 #include "ICipher.hpp"
 #include "StringDecryptor.hpp"
 
@@ -33,10 +32,11 @@ void StringDecryptor::decrypt(std::string &encoded, Mode mode) {
 				this, i, 4, std::ref(encoded));
 		else if (mode == Mode::Reversed)
 			thread_vector[i] = std::thread(&StringDecryptor::encrypt_thread,
-										   this, i, 4, std::ref(encoded));
+				this, i, 4, std::ref(encoded));
 	}
 	for (std::thread &thr: thread_vector)
-		thr.join();
+		if (thr.joinable())
+			thr.join();
 }
 
 
