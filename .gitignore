@@ -3,3 +3,9 @@ cmake-build-debug
 encoded.txt
 encoded2.txt
 decoded.txt
+.DS_Store
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+encodedt.txt
