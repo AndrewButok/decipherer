@@ -1,6 +1,8 @@
 #include "FileDecryptor.hpp"
 
 #include <memory>
+#include <iomanip>
+#include <iostream>
 
 FileDecryptor::FileDecryptor(const std::string &inputFilename,
 							 const std::string &outputFilename,
@@ -22,7 +24,9 @@ void FileDecryptor::decrypt(StringDecryptor::Mode mode) {
 	}
 	this->inputFileStream.close();
 	this->decryptor->decrypt(*str_ptr, mode);
-	while (!this->decryptor->ready());
+	while (!this->decryptor->ready())
+		std::cout << "\r" <<std::setw(6) << std::setprecision(2) << this->decryptor->getProgress() << " % is complete.";
+	std::cout << "\rDecryption is complete." << std::endl;
 	this->outputFileStream << this->decryptor->getResult();
 	this->outputFileStream.close();
 }

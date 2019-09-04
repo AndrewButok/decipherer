@@ -15,6 +15,9 @@ public:
 private:
 	CipherPtr								_cipher;
 	std::vector<std::future<std::string>>	_buffer;
+	std::mutex								_m_chars;
+	size_t									_charsProcessed;
+	size_t									_taskSize;
 
 	StringDecryptor();
 	StringDecryptor(const StringDecryptor &);
@@ -28,6 +31,7 @@ public:
 	void decrypt(const std::string &encoded, Mode mode);
 	std::string getResult();
 	bool ready();
+	double getProgress();
 };
 
 using StringDecryptorPtr = std::unique_ptr<StringDecryptor>;

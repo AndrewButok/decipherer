@@ -3,20 +3,25 @@
 #include "StringDecryptor.hpp"
 
 std::string StringDecryptor::decrypt_thread(std::string encoded, size_t fpos, char (ICipher::*decrypt_fun)(char, size_t)) {
-	for (std::string::iterator iter = encoded.begin(); iter != encoded.end(); iter++) {
+	for (std::string::iterator iter = encoded.begin();
+		 iter != encoded.end(); iter++) {
 		if (!this->_cipher->isAlphabetChar(*iter)) {
 			iter--;
 			encoded.erase(iter + 1);
 		}
 	}
-	for (size_t position = 0; position < encoded.size(); position++)
+	for (size_t position = 0; position < encoded.size(); position++) {
 		encoded[position] = (this->_cipher.get()->*decrypt_fun)(
-				encoded[position], position + fpos);
+			encoded[position], position + fpos);
+		std::lock_guard<std::mutex> guard(_m_chars);
+		_charsProcessed++;
+	}
 	return encoded;
 }
 
 void StringDecryptor::decrypt(const std::string &encoded, Mode mode) {
 	this->_buffer.clear();
+	this->_taskSize = encoded.size();
 	char (ICipher::*decrypt_fun)(char, size_t) = mode == Mode::Normal ?
 			&ICipher::decrypt : &ICipher::encrypt;
 	for (size_t pos = 0; pos < 4; pos++) {
@@ -46,13 +51,26 @@ bool StringDecryptor::ready() {
 	return true;
 }
 
-StringDecryptor::StringDecryptor(): _cipher(nullptr) {
+double StringDecryptor::getProgress() {
+	if (this->ready())
+		return 100;
+	double progress;
+	{
+		std::lock_guard<std::mutex> guard(_m_chars);
+		progress = this->_charsProcessed;
+	}
+	progress /= this->_taskSize;
+	progress *= 100;
+	return progress;
 }
 
-StringDecryptor::StringDecryptor(CipherPtr cipher): _cipher(std::move(cipher)) {
+StringDecryptor::StringDecryptor(): _cipher(nullptr), _charsProcessed(0), _taskSize(0) {
 }
 
-StringDecryptor::StringDecryptor(const StringDecryptor &decipher): _cipher(nullptr) {
+StringDecryptor::StringDecryptor(CipherPtr cipher): _cipher(std::move(cipher)), _charsProcessed(0), _taskSize(0) {
+}
+
+StringDecryptor::StringDecryptor(const StringDecryptor &decipher): _cipher(nullptr), _charsProcessed(0), _taskSize(0) {
 
 }
 
