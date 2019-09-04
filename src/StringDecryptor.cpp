@@ -16,6 +16,7 @@ std::string StringDecryptor::decrypt_thread(std::string encoded, size_t fpos, ch
 }
 
 void StringDecryptor::decrypt(const std::string &encoded, Mode mode) {
+	this->_buffer.clear();
 	char (ICipher::*decrypt_fun)(char, size_t) = mode == Mode::Normal ?
 			&ICipher::decrypt : &ICipher::encrypt;
 	for (size_t pos = 0; pos < 4; pos++) {
