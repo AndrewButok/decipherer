@@ -27,9 +27,9 @@ void StringDecryptor::decrypt(std::string &encoded, Mode mode) {
 					std::move(encoded.substr(str_begin, char_number)), str_begin, decrypt_fun));
 	}
 	encoded.clear();
-	std::for_each(_buffer.begin(), _buffer.end(), [&encoded](std::future<std::string> &c) {
+	for (std::future<std::string> &c: this->_buffer)
 		encoded += c.get();
-	});
+	_buffer.clear();
 }
 
 
