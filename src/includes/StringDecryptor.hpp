@@ -25,7 +25,9 @@ public:
 	explicit StringDecryptor(CipherPtr cipher);
 	~StringDecryptor();
 
-	void decrypt(std::string &encoded, Mode mode);
+	void decrypt(const std::string &encoded, Mode mode);
+	std::string getResult();
+	bool ready();
 };
 
 using StringDecryptorPtr = std::unique_ptr<StringDecryptor>;

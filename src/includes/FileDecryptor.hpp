@@ -14,7 +14,7 @@ private:
 	FileDecryptor(const FileDecryptor&);
 	FileDecryptor &operator=(const FileDecryptor&);
 public:
-	FileDecryptor(std::string inputFilename, std::string outputFilename, CipherPtr decryptor);
+	FileDecryptor(const std::string &inputFilename, const std::string &outputFilename, CipherPtr decryptor);
 
 	void decrypt(StringDecryptor::Mode mode);
 };

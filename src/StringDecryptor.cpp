@@ -15,7 +15,7 @@ std::string StringDecryptor::decrypt_thread(std::string encoded, size_t fpos, ch
 	return encoded;
 }
 
-void StringDecryptor::decrypt(std::string &encoded, Mode mode) {
+void StringDecryptor::decrypt(const std::string &encoded, Mode mode) {
 	char (ICipher::*decrypt_fun)(char, size_t) = mode == Mode::Normal ?
 			&ICipher::decrypt : &ICipher::encrypt;
 	for (size_t pos = 0; pos < 4; pos++) {
@@ -26,12 +26,24 @@ void StringDecryptor::decrypt(std::string &encoded, Mode mode) {
 					&StringDecryptor::decrypt_thread, this,
 					std::move(encoded.substr(str_begin, char_number)), str_begin, decrypt_fun));
 	}
-	encoded.clear();
-	for (std::future<std::string> &c: this->_buffer)
-		encoded += c.get();
-	_buffer.clear();
 }
 
+std::string StringDecryptor::getResult() {
+	std::string ret_val;
+	for (std::future<std::string> &result: this->_buffer){
+		if (result.wait_for(std::chrono::nanoseconds(1)) == std::future_status::ready)
+			ret_val += result.get();
+	}
+	return ret_val;
+}
+
+bool StringDecryptor::ready() {
+	for (std::future<std::string> &result: this->_buffer){
+		if (result.wait_for(std::chrono::nanoseconds(1)) != std::future_status::ready)
+			return false;
+	}
+	return true;
+}
 
 StringDecryptor::StringDecryptor(): _cipher(nullptr) {
 }

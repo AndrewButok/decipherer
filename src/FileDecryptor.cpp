@@ -2,8 +2,8 @@
 
 #include <memory>
 
-FileDecryptor::FileDecryptor(std::string inputFilename,
-							 std::string outputFilename,
+FileDecryptor::FileDecryptor(const std::string &inputFilename,
+							 const std::string &outputFilename,
 							 CipherPtr cipher) {
 	this->inputFileStream = std::ifstream(inputFilename);
 	this->outputFileStream = std::ofstream(outputFilename);
@@ -22,7 +22,8 @@ void FileDecryptor::decrypt(StringDecryptor::Mode mode) {
 	}
 	this->inputFileStream.close();
 	this->decryptor->decrypt(*str_ptr, mode);
-	this->outputFileStream << *str_ptr;
+	while (!this->decryptor->ready());
+	this->outputFileStream << this->decryptor->getResult();
 	this->outputFileStream.close();
 }
 
