@@ -3,10 +3,10 @@
 #include "StringDecryptor.hpp"
 
 std::string StringDecryptor::decrypt_thread(std::string encoded, size_t fpos, char (ICipher::*decrypt_fun)(char, size_t)) {
-	for (std::string::iterator position = encoded.begin(); position != encoded.end(); position++) {
-		if (!this->_cipher->isAlphabetChar(*position)) {
-			position--;
-			encoded.erase(position + 1);
+	for (std::string::iterator iter = encoded.begin(); iter != encoded.end(); iter++) {
+		if (!this->_cipher->isAlphabetChar(*iter)) {
+			iter--;
+			encoded.erase(iter + 1);
 		}
 	}
 	for (size_t position = 0; position < encoded.size(); position++)
