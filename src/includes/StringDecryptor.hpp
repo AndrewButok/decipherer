@@ -16,14 +16,11 @@ public:
 private:
 	CipherPtr								_cipher;
 	std::vector<std::future<std::string>>	_buffer;
-	std::mutex								_mutex;
 
 	StringDecryptor();
 	StringDecryptor(const StringDecryptor &);
 	StringDecryptor &operator=(const StringDecryptor &);
 
-//	void decrypt_thread(int begin, int thread_count, std::string &encoded);
-//	void encrypt_thread(int begin, int thread_count, std::string &raw);
 	std::string decrypt_thread(std::string encoded, size_t pos, char (ICipher::*decrypt_fun)(char, size_t));
 public:
 	explicit StringDecryptor(CipherPtr cipher);
