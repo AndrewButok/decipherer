@@ -1,7 +1,3 @@
-//
-// Created by Андрій Буток on 8/31/19.
-//
-
 #include "FileDecryptor.hpp"
 
 #include <memory>

@@ -1,7 +1,6 @@
 #ifndef AFFINECIPHER_HPP
 #define AFFINECIPHER_HPP
 
-
 #include <cstddef>
 #include <string>
 #include "ACipher.hpp"
@@ -17,10 +16,10 @@ public:
 	AffineCipher(int a, int b, std::string alphabet);
 	AffineCipher(const AffineCipher&);
 	AffineCipher &operator=(const AffineCipher&);
-	~AffineCipher() override;
+	virtual ~AffineCipher() override;
 
-	char encrypt(char in, size_t pos) override;
-	char decrypt(char in, size_t pos) override;
+	virtual char encrypt(char in, size_t pos) override;
+	virtual char decrypt(char in, size_t pos) override;
 };
 
 

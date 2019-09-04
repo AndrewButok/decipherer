@@ -1,8 +1,7 @@
-#ifndef DECHIPER_HPP
-#define DECHIPER_HPP
+#ifndef STRINGDECHIPER_HPP
+#define STRINGDECHIPER_HPP
 
 #include <memory>
-#include <mutex>
 #include <vector>
 #include <future>
 #include "ICipher.hpp"
@@ -31,4 +30,4 @@ public:
 
 using StringDecryptorPtr = std::unique_ptr<StringDecryptor>;
 
-#endif //DECHIPER_HPP
+#endif //STRINGDECHIPER_HPP

@@ -14,11 +14,10 @@ public:
 	VigenereCipher(const std::string &key, std::string alphabet, const std::string &key_alphabet="");
 	VigenereCipher(const VigenereCipher &);
 	VigenereCipher &operator=(const VigenereCipher&);
-	~VigenereCipher() override;
+	virtual ~VigenereCipher() override;
 
-	char encrypt(char in, size_t pos) override;
-
-	char decrypt(char in, size_t pos) override;
+	virtual char encrypt(char in, size_t pos) override;
+	virtual char decrypt(char in, size_t pos) override;
 };
 
 
