@@ -10,10 +10,11 @@ private:
 	std::ofstream			outputFileStream;
 	StringDecryptorPtr		decryptor;
 	
-	FileDecryptor();
-	FileDecryptor(const FileDecryptor&);
-	FileDecryptor &operator=(const FileDecryptor&);
+
 public:
+    FileDecryptor() = delete;
+    FileDecryptor(const FileDecryptor&) = delete;
+    FileDecryptor &operator=(const FileDecryptor&) = delete;
 	FileDecryptor(const std::string &inputFilename, const std::string &outputFilename, CipherPtr decryptor);
 
 	void decrypt(StringDecryptor::Mode mode);

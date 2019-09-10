@@ -64,18 +64,8 @@ double StringDecryptor::getProgress() {
 	return progress;
 }
 
-StringDecryptor::StringDecryptor(): _cipher(nullptr), _charsProcessed(0), _taskSize(0) {
-}
 
 StringDecryptor::StringDecryptor(CipherPtr cipher): _cipher(std::move(cipher)), _charsProcessed(0), _taskSize(0) {
-}
-
-StringDecryptor::StringDecryptor(const StringDecryptor &decipher): _cipher(nullptr), _charsProcessed(0), _taskSize(0) {
-
-}
-
-StringDecryptor &StringDecryptor::operator=(const StringDecryptor &decipher) {
-	return *this;
 }
 
 StringDecryptor::~StringDecryptor() = default;

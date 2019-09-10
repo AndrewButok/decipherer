@@ -10,9 +10,9 @@ private:
 	int			_a;
 	int			_b;
 
-	AffineCipher();
 	static bool isCoprime(int a, int b);
 public:
+    AffineCipher() = delete;
 	AffineCipher(int a, int b, std::string alphabet);
 	AffineCipher(const AffineCipher&);
 	AffineCipher &operator=(const AffineCipher&);

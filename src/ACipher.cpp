@@ -10,8 +10,6 @@ bool ACipher::_isAlphabetValid(const std::string &alphabet) {
 	return true;
 }
 
-ACipher::ACipher(): _alphabet("") {}
-ACipher::ACipher(const ACipher &cipher): _alphabet(cipher._alphabet){}
 ACipher::ACipher(std::string alphabet) {
 	if (!_isAlphabetValid(alphabet))
 		throw std::invalid_argument("Invalid alphabet.");

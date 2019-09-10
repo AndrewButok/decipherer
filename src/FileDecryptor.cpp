@@ -30,13 +30,3 @@ void FileDecryptor::decrypt(StringDecryptor::Mode mode) {
 	this->outputFileStream << this->decryptor->getResult();
 	this->outputFileStream.close();
 }
-
-FileDecryptor::FileDecryptor() {
-}
-
-FileDecryptor::FileDecryptor(const FileDecryptor&) {
-}
-
-FileDecryptor &FileDecryptor::operator=(const FileDecryptor &) {
-	return *this;
-}

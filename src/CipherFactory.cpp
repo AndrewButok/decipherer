@@ -23,18 +23,3 @@ CipherFactoryPtr CipherFactory::getInstance() {
 		CipherFactory::_instance = CipherFactoryPtr {new CipherFactory()};
 	return CipherFactory::_instance;
 }
-
-CipherFactory::CipherFactory() {
-
-}
-
-CipherFactory::CipherFactory(const CipherFactory&){
-
-}
-
-CipherFactory &CipherFactory::operator=(const CipherFactory&){
-	return *this;
-}
-
-CipherFactory::~CipherFactory() {
-}

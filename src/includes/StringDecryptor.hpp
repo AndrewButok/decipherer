@@ -19,12 +19,11 @@ private:
 	size_t									_charsProcessed;
 	size_t									_taskSize;
 
-	StringDecryptor();
-	StringDecryptor(const StringDecryptor &);
-	StringDecryptor &operator=(const StringDecryptor &);
-
 	std::string decrypt_thread(std::string encoded, size_t pos, char (ICipher::*decrypt_fun)(char, size_t));
 public:
+    StringDecryptor() = delete;
+    StringDecryptor(const StringDecryptor &) = delete;
+    StringDecryptor &operator=(const StringDecryptor &) = delete;
 	explicit StringDecryptor(CipherPtr cipher);
 	~StringDecryptor();
 

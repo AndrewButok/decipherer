@@ -21,7 +21,7 @@ char VigenereCipher::decrypt(char in, size_t pos) {
 	if (char_pos < 0)
 		char_pos = static_cast<long long>(this->_alphabet.size()) - char_pos;
 	return _alphabet[char_pos];
-};
+}
 
 VigenereCipher::VigenereCipher(const std::string &key, std::string alphabet,
 							const std::string &key_alphabet):
@@ -42,16 +42,6 @@ VigenereCipher::VigenereCipher(const std::string &key, std::string alphabet,
 			_shifts.push_back(static_cast<long>(pos));
 		}
 	}
-}
-
-VigenereCipher::VigenereCipher():
-	ACipher(), _shifts() {
-
-}
-
-VigenereCipher::VigenereCipher(const VigenereCipher &vigenereCipher):
-	ACipher(vigenereCipher), _shifts(vigenereCipher._shifts) {
-
 }
 
 VigenereCipher &VigenereCipher::operator=(const VigenereCipher &vigenereCipher){

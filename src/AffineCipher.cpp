@@ -34,11 +34,7 @@ AffineCipher::AffineCipher(int a, int b, std::string alphabet): ACipher(std::mov
 	this->_b = b;
 }
 
-AffineCipher::AffineCipher(): ACipher(), _a(0), _b(0) {
-
-}
-
-AffineCipher::AffineCipher(const AffineCipher &affineCipher): ACipher(affineCipher), _a(affineCipher._a), _b(affineCipher._b) {
+AffineCipher::AffineCipher(const AffineCipher &affineCipher): ACipher(affineCipher._alphabet), _a(affineCipher._a), _b(affineCipher._b) {
 
 }
 

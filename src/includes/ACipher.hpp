@@ -10,11 +10,12 @@ protected:
 
 	static bool _isAlphabetValid(const std::string &alphabet);
 
-	ACipher();
-	ACipher(const ACipher&);
 	ACipher &operator=(const ACipher &);
 	explicit ACipher(std::string alphabet);
 public:
+    ACipher() = delete;
+    ACipher(const ACipher&) = delete;
+
 	virtual bool isAlphabetChar(char ch) override;
 	virtual ~ACipher() override;
 };

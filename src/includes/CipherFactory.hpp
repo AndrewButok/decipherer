@@ -13,12 +13,12 @@ class CipherFactory {
 private:
 	static CipherFactoryPtr _instance;
 
-	CipherFactory();
-	CipherFactory(const CipherFactory&);
-	CipherFactory &operator=(const CipherFactory&);
+	CipherFactory() = default;
 public:
+    CipherFactory(const CipherFactory&) = delete;
+    CipherFactory &operator=(const CipherFactory&) = delete;
 	static CipherFactoryPtr getInstance();
-	virtual ~CipherFactory();
+	virtual ~CipherFactory() = default;
 
 	CipherPtr createCipher(const std::string &keyword);
 	CipherPtr createCipher(const std::string &a, const std::string &b);

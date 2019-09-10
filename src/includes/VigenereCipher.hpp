@@ -9,8 +9,8 @@ private:
 	std::vector<long> _shifts;
 
 	static void checkKey(const std::string &key, const std::string &alphabet);
-	VigenereCipher();
 public:
+    VigenereCipher() = delete;
 	VigenereCipher(const std::string &key, std::string alphabet, const std::string &key_alphabet="");
 	VigenereCipher(const VigenereCipher &);
 	VigenereCipher &operator=(const VigenereCipher&);
