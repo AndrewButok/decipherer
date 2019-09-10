@@ -3,15 +3,15 @@
 
 #include <string>
 #include "ICipher.hpp"
-#include "ACipherFactory.hpp"
+#include "ICipherFactory.hpp"
 
-class EnglishCipherFactory: public ACipherFactory {
+class EnglishCipherFactory: public ICipherFactory {
 private:
 	static CipherFactoryPtr _instance;
 
 	EnglishCipherFactory() = default;
 public:
-    EnglishCipherFactory(const ACipherFactory&) = delete;
+    EnglishCipherFactory(const ICipherFactory&) = delete;
     EnglishCipherFactory &operator=(const EnglishCipherFactory&) = delete;
 	static CipherFactoryPtr getInstance();
 	virtual ~EnglishCipherFactory() override = default;

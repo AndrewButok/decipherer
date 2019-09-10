@@ -8,4 +8,4 @@ add_executable(decipherer src/main.cpp
         src/StringDecryptor.cpp
         src/AffineCipher.cpp
         src/ACipher.cpp
-        src/VigenereCipher.cpp src/FileDecryptor.cpp src/includes/FileDecryptor.hpp src/EnglishCipherFactory.cpp src/includes/EnglishCipherFactory.hpp src/includes/ACipherFactory.hpp)
+        src/VigenereCipher.cpp src/FileDecryptor.cpp src/includes/FileDecryptor.hpp src/EnglishCipherFactory.cpp src/includes/EnglishCipherFactory.hpp src/includes/ICipherFactory.hpp)
