@@ -44,7 +44,7 @@ VigenereCipher::VigenereCipher(const std::string &key, std::string alphabet,
 	}
 }
 
-VigenereCipher::VigenereCipher(const VigenereCipher &vigenereCipher): ACipher(vigenereCipher._alphabet), _shifts(_shifts){
+VigenereCipher::VigenereCipher(const VigenereCipher &vigenereCipher): ACipher(vigenereCipher._alphabet), _shifts(vigenereCipher._shifts){
 
 }
 

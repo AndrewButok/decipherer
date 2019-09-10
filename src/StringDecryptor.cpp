@@ -22,7 +22,7 @@ std::string StringDecryptor::decrypt_thread(std::string encoded, size_t fpos, ch
 void StringDecryptor::decrypt(const std::string &encoded, Mode mode) {
 	this->_buffer.clear();
 	this->_taskSize = encoded.size();
-	char (ICipher::*decrypt_fun)(char, size_t) = mode == Mode::Normal ?
+	auto decrypt_fun = mode == Mode::Normal ?
 			&ICipher::decrypt : &ICipher::encrypt;
 	for (size_t pos = 0; pos < 4; pos++) {
 		size_t	str_begin = (encoded.size() / 4) * pos,
